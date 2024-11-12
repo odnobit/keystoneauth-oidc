@@ -56,6 +56,11 @@ class OpenIDConnectAuthorizationCode(v3._OpenIDConnectBase):
             m = ("You have to specify either an 'authorization-endpoint' or "
                  "a 'discovery-endpoint'.")
             raise exceptions.OptionError(m)
+        
+        if not kwargs.get("client_id"):
+            kwargs["client_id"] = "os-cli"
+        if not kwargs.get("client_secret"):
+            kwargs["client_secret"] = None
 
         return super(OpenIDConnectAuthorizationCode,
                      self).load_from_options(**kwargs)
